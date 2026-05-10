@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caminho do Desenvolvedor - Quiz</title>
+</head>
+
+<body>
+
+  <!-- TELA INICIAL -->
+  <div id="start-screen">
+
+    <h1>Bem-vindo ao Caminho do Desenvolvedor</h1>
+
+    <p>
+      Descubra qual a melhor descrição para os campos de conhecimento do curso
+      de Análise e Desenvolvimento de Sistemas, e trilhe o caminho para se
+      tornar um desenvolvedor de sucesso!
+    </p>
+
+    <p>Insira seu nome para começar:</p>
+
+    <input type="text" id="username" placeholder="Digite seu nome">
+    <br><br>
+
+    <button onclick="startJourney()">Iniciar Jornada</button>
+
+  </div>
+
+  <!-- TELA DO QUIZ -->
+  <div id="quiz-screen" style="display: none;">
+
+    <h2 id="welcome-player"></h2>
+
+    <h3 id="question"></h3>
+
+    <div id="answers"></div>
+
+    <br>
+
+    <p id="level-message"></p>
+
+    <p>
+      Pergunta:
+      <span id="current-question"></span>/5
+    </p>
+
+  </div>
+
+  <!-- TELA FINAL -->
+  <div id="final-screen" style="display: none;">
+
+    <h1>Fim da Jornada!</h1>
+
+    <h2 id="final-player"></h2>
+
+    <h3 id="final-score"></h3>
+
+    <h3 id="final-level"></h3>
+
+    <button onclick="location.reload()">
+      Jogar Novamente
+      <!-- Fazer um botão de "Voltar para o menu inicial" -->
+    </button>
+
+  </div>
+
+  <script> // Parte em JS
+
+    let username = "";
+    let score = 0;
+    let hits = 0;
+    let errors = 0;
+    let currentQuestionIndex = 0;
+
+    const levels = [
+      "Estudante em Análise e Desenvolvimento de Sistemas. Você tem toda uma nova aventura em Tecnologia para trilhar.",
+      "Parabéns! Você se tornou o mais novo estagiário em Análise e Desenvolvimento de Sistemas!",
+      "Ótimo, você completou os 3 anos de curso com louvor, Parabéns, Desenvolvedor ",
+      "Uau! Uma baita oportunidade apareceu pra você, e agora você é o novo Júnior de uma grande empresa de Tecnologia!",
+      "Eles gostaram tanto de você, que uma promoção surgiu: Pleno, é pegar ou largar!",
+      "Que incrível, você deu seu sangue, mostrou seu valor, e agora se tornou Sênior dentro da área de TI que você sempre sonhou! Parabéns! Sempre acreditei em você!"
+    ];
+
+    const loseMessages = {
+      "0": "A facul tá puxada, né! Não desiste!",
+      "1-0": "O seu contrato de estágio acabou, e não rolou a efetivação dessa vez, mas continue tentando!",
+      "2-1": "Você perdeu o dia da sua Colação, e agora vai esperar mais um pouco pra finalizar o curso, mas tá tudo bem, são só mais 6 meses! kkkkrying",
+      "3-2": "O trabalho de Júnior tá difícil, é muito cafézinho pra servir e pouco código pra codar. Você achou melhor procurar novos ares, e tá tudo bem.",
+      "4-3": "Estão tentando te mudar de área dentro da empresa, para uma área de TI que você não sabe nada! Calma, não se desespera."
+    };
+
+    const questions = [
+      {
+        question: "📘 Matemática Discreta",
+        answers: [
+          "Matemática que só aparece de vez em quando, bem discreta",
+          "Matemática que não gosta de chamar atenção nas festas",
+          "Estuda estruturas matemáticas finitas e separadas, como lógica, conjuntos, grafos e combinatória"
+        ],
+        correct: 2
+      },
+
+      {
+        question: "💻 Programação em Microinformática",
+        answers: [
+          "Programar micro-ondas, microfone e microcarros",
+          "Fazer programas tão pequenos que só funcionam em calculadora",
+          "Desenvolver softwares para computadores pessoais e sistemas de pequeno porte"
+        ],
+        correct: 2
+      },
+
+      {
+        question: "🧠 Algoritmos e Lógica de Programação",
+        answers: [
+          "Ensina a discutir com lógica para ganhar qualquer discussão",
+          "Criar enigmas impossíveis só para confundir as pessoas",
+          "Ensina a criar passos lógicos e organizados para resolver problemas com programação"
+        ],
+        correct: 2
+      },
+
+      {
+        question: "🖱️ Interação Humano Computador",
+        answers: [
+          "Como discutir com o computador quando ele trava",
+          "Ensina o computador a entender sentimentos humanos",
+          "Estuda como pessoas interagem com sistemas, focando em usabilidade, experiência e interfaces"
+        ],
+        correct: 2
+      },
+
+      {
+        question: "🌐 Redes de Computadores",
+        answers: [
+          "Conectar pessoas fofoqueiras em grupo",
+          "Criar redes sociais novas todo dia",
+          "Estuda como computadores se conectam e trocam dados entre si"
+        ],
+        correct: 2
+      },
+
+      {
+        question: "🤖 Inteligência Artificial",
+        answers: [
+          "Fazer o computador virar um gênio e te substituir",
+          "Criar robôs que dominam o mundo",
+          "Desenvolver sistemas capazes de aprender, tomar decisões e resolver problemas de forma inteligente"
+        ],
+        correct: 2
+      },
+
+      {
+        question: "🔐 Segurança da Informação",
+        answers: [
+          "Colocar senha em tudo e esquecer depois",
+          "Proteger fofocas digitais importantes",
+          "Proteger dados e sistemas contra acessos não autorizados, ataques e falhas"
+        ],
+        correct: 2
+      },
+
+      {
+        question: "⚙️ Programação de Scripts",
+        answers: [
+          "Escrever roteiros de filmes sobre programadores",
+          "Criar scripts para novelas de tecnologia",
+          "Automatizar tarefas usando scripts, geralmente simples e rápidos"
+        ],
+        correct: 2
+      },
+
+      {
+        question: "🗄️ Banco de Dados",
+        answers: [
+          "Estuda bancos de praça cheios de informações",
+          "Onde os dados vão pedir empréstimo",
+          "Armazenamento, organização e manipulação de dados em sistemas estruturados"
+        ],
+        correct: 2
+      },
+
+      {
+        question: "📈 Programação Linear e Aplicações",
+        answers: [
+          "Programar apenas em linha reta, sem curvas",
+          "Fazer códigos que nunca saem do caminho",
+          "Resolver problemas de otimização usando equações lineares e restrições"
+        ],
+        correct: 2
+      }
+    ];
+
+    let selectedQuestions = [];
+
+    function startJourney() {
+
+      username = document.getElementById("username").value;
+
+      if (username.trim() === "") {
+        alert("Digite seu nome!");
+        return;
+      }
+
+      document.getElementById("start-screen").style.display = "none";
+      document.getElementById("quiz-screen").style.display = "block";
+
+      document.getElementById("welcome-player").innerText =
+        "Boa sorte, " + username + "!";
+
+      selectedQuestions = shuffleArray(questions).slice(0, 5);
+
+      showQuestion();
+    }
+
+    function shuffleArray(array) {
+
+      let shuffled = [...array];
+
+      for (let i = shuffled.length - 1; i > 0; i--) {
+
+        let j = Math.floor(Math.random() * (i + 1));
+
+        [shuffled[i], shuffled[j]] =
+          [shuffled[j], shuffled[i]];
+      }
+
+      return shuffled;
+    }
+
+    function showQuestion() {
+
+      if (currentQuestionIndex >= selectedQuestions.length) {
+        showFinalScreen();
+        return;
+      }
+
+      const questionData = selectedQuestions[currentQuestionIndex];
+
+      document.getElementById("question").innerText =
+        questionData.question;
+
+      document.getElementById("current-question").innerText =
+        currentQuestionIndex + 1;
+
+      const answersDiv = document.getElementById("answers");
+
+      answersDiv.innerHTML = "";
+
+      questionData.answers.forEach((answer, index) => {
+
+        const button = document.createElement("button");
+
+        button.innerText = answer;
+
+        button.onclick = () => checkAnswer(index);
+
+        answersDiv.appendChild(button);
+
+        answersDiv.appendChild(document.createElement("br"));
+        answersDiv.appendChild(document.createElement("br"));
+      });
+    }
+
+    function checkAnswer(selected) {
+
+      const questionData = selectedQuestions[currentQuestionIndex];
+
+      const previousScore = score;
+
+      if (selected === questionData.correct) {
+
+        hits++;
+
+        if (score < 5) {
+          score++;
+        }
+
+        if (score === 2) {
+          document.getElementById("level-message").innerText =
+            levels[score] + username + "!";
+        }
+
+        else {
+          document.getElementById("level-message").innerText =
+            levels[score];
+        }
+
+      } else {
+
+        errors++;
+
+        if (score > 0) {
+          score--;
+        }
+
+        if (previousScore === 0 && score === 0) {
+
+          document.getElementById("level-message").innerText =
+            loseMessages["0"];
+
+        } else {
+
+          const key = previousScore + "-" + score;
+
+          if (loseMessages[key]) {
+
+            document.getElementById("level-message").innerText =
+              loseMessages[key];
+
+          } else {
+
+            document.getElementById("level-message").innerText =
+              loseMessages["0"];
+          }
+        }
+      }
+
+      currentQuestionIndex++;
+
+      setTimeout(showQuestion, 2000);
+    }
+
+    function showFinalScreen() {
+
+      document.getElementById("quiz-screen").style.display = "none";
+
+      document.getElementById("final-screen").style.display = "block";
+
+      document.getElementById("final-player").innerText =
+        "Parabéns por jogar, " + username + "!";
+
+      document.getElementById("final-score").innerText =
+        hits + "/5 (" + hits + " acertos / " + errors + " erros)";
+
+      let finalLevel = "";
+
+      switch (score) {
+
+        case 0:
+          finalLevel = "Você terminou como: Estudante ADS";
+          break;
+
+        case 1:
+          finalLevel = "Você terminou como: Estagiário";
+          break;
+
+        case 2:
+          finalLevel = "Você terminou como: Desenvolvedor";
+          break;
+
+        case 3:
+          finalLevel = "Você terminou como: Desenvolvedor Júnior";
+          break;
+
+        case 4:
+          finalLevel = "Você terminou como: Desenvolvedor Pleno";
+          break;
+
+        case 5:
+          finalLevel = "Você terminou como: Desenvolvedor Sênior";
+          break;
+      }
+
+      document.getElementById("final-level").innerText =
+        finalLevel;
+    }
+
+  </script>
+
+</body>
+
+</html>
