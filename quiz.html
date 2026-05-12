@@ -84,14 +84,6 @@
       "Que incrível, você deu seu sangue, mostrou seu valor, e agora se tornou Sênior dentro da área de TI que você sempre sonhou! Parabéns! Sempre acreditei em você!"
     ];
 
-    const loseMessages = {
-      "0": "A facul tá puxada, né! Não desiste!",
-      "1-0": "O seu contrato de estágio acabou, e não rolou a efetivação dessa vez, mas continue tentando!",
-      "2-1": "Você perdeu o dia da sua Colação, e agora vai esperar mais um pouco pra finalizar o curso, mas tá tudo bem, são só mais 6 meses! kkkkrying",
-      "3-2": "O trabalho de Júnior tá difícil, é muito cafézinho pra servir e pouco código pra codar. Você achou melhor procurar novos ares, e tá tudo bem.",
-      "4-3": "Estão tentando te mudar de área dentro da empresa, para uma área de TI que você não sabe nada! Calma, não se desespera."
-    };
-
     const questions = [
       {
         question: "📘 Matemática Discreta",
@@ -231,6 +223,17 @@
       return shuffled;
     }
 
+    function showTemporaryMessage(message) {
+
+      const messageElement =
+        document.getElementById("level-message");
+
+      messageElement.innerText = message;
+
+      setTimeout(() => {
+        messageElement.innerText = "";
+      }, 2000);
+    }
     function showQuestion() {
 
       if (currentQuestionIndex >= selectedQuestions.length) {
@@ -269,54 +272,31 @@
 
       const questionData = selectedQuestions[currentQuestionIndex];
 
-      const previousScore = score;
-
       if (selected === questionData.correct) {
 
         hits++;
 
-        if (score < 5) {
-          score++;
-        }
+        score = hits;
 
-        if (score === 2) {
-          document.getElementById("level-message").innerText =
-            levels[score] + username + "!";
-        }
+        if (score < levels.length) {
 
-        else {
-          document.getElementById("level-message").innerText =
-            levels[score];
+          if (score === 2) {
+
+            showTemporaryMessage(levels[score] + username + "!");
+
+          } else {
+
+            showTemporaryMessage(levels[score]);
+          }
         }
 
       } else {
 
         errors++;
 
-        if (score > 0) {
-          score--;
-        }
-
-        if (previousScore === 0 && score === 0) {
-
-          document.getElementById("level-message").innerText =
-            loseMessages["0"];
-
-        } else {
-
-          const key = previousScore + "-" + score;
-
-          if (loseMessages[key]) {
-
-            document.getElementById("level-message").innerText =
-              loseMessages[key];
-
-          } else {
-
-            document.getElementById("level-message").innerText =
-              loseMessages["0"];
-          }
-        }
+        showTemporaryMessage(
+          "❌ Resposta errada, mas não desista! Continue tentando!"
+        );
       }
 
       currentQuestionIndex++;
@@ -338,18 +318,18 @@
 
       let finalLevel = "";
 
-      switch (score) {
+      switch (hits) {
 
         case 0:
           finalLevel = "Você terminou como: Estudante ADS";
           break;
 
         case 1:
-          finalLevel = "Você terminou como: Estagiário";
+          finalLevel = "Você terminou como: Estagiário em TI";
           break;
 
         case 2:
-          finalLevel = "Você terminou como: Desenvolvedor";
+          finalLevel = "Você concluiu a graduação e agora é de ADS!";
           break;
 
         case 3:
