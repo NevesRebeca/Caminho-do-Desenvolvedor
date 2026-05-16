@@ -8,7 +8,7 @@
 </head>
 
 <body>
-
+  <!-- Tail Wind -->
   <!-- TELA INICIAL -->
   <div id="start-screen">
 
@@ -224,7 +224,7 @@
     }
 
     function showTemporaryMessage(message) {
-
+      //  Mudar para botão "Continuar"
       const messageElement =
         document.getElementById("level-message");
 
@@ -234,8 +234,8 @@
         messageElement.innerText = "";
       }, 2000);
     }
-    function showQuestion() {
 
+    function showQuestion() {
       if (currentQuestionIndex >= selectedQuestions.length) {
         showFinalScreen();
         return;
@@ -269,7 +269,6 @@
     }
 
     function checkAnswer(selected) {
-
       const questionData = selectedQuestions[currentQuestionIndex];
 
       if (selected === questionData.correct) {
@@ -279,19 +278,13 @@
         score = hits;
 
         if (score < levels.length) {
-
           if (score === 2) {
-
             showTemporaryMessage(levels[score] + username + "!");
-
           } else {
-
             showTemporaryMessage(levels[score]);
           }
         }
-
       } else {
-
         errors++;
 
         showTemporaryMessage(
@@ -305,9 +298,7 @@
     }
 
     function showFinalScreen() {
-
       document.getElementById("quiz-screen").style.display = "none";
-
       document.getElementById("final-screen").style.display = "block";
 
       document.getElementById("final-player").innerText =
@@ -319,27 +310,21 @@
       let finalLevel = "";
 
       switch (hits) {
-
         case 0:
           finalLevel = "Você terminou como: Estudante ADS";
           break;
-
         case 1:
           finalLevel = "Você terminou como: Estagiário em TI";
           break;
-
         case 2:
           finalLevel = "Você concluiu a graduação e agora é de ADS!";
           break;
-
         case 3:
           finalLevel = "Você terminou como: Desenvolvedor Júnior";
           break;
-
         case 4:
           finalLevel = "Você terminou como: Desenvolvedor Pleno";
           break;
-
         case 5:
           finalLevel = "Você terminou como: Desenvolvedor Sênior";
           break;
