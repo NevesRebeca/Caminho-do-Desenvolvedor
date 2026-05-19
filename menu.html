@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="">
+        <div id="menu">
+            <h1>Bem-vindo a Fatec de portas abertas</h1>
+            <p>Escolha uma opção abaixo para começar sua jornada no mundo da tecnologia e lógica de programação.</p>
+
+            <button onclick="location.href='quiz.html'">Caminho do Desenvolvedor</button>
+
+            <a href=".html">
+                <button>A caminho da feira</button>
+            </a>
+
+            <button onclick="mostrarConfig()">Configurações</button>
+
+            <button onclick="mostrarCreditos()">Créditos</button>
+        </div>
+        
+        <div class="container" id="creditos" style="display: none;">
+            <p>
+                Desenvolbido por: Rebeca Neves e Henrique Fernandes. <br>
+                Projeto feito com o apoio da Fatec Jundiaí.
+            </p>
+        
+            <button onclick="mostrarMenu()">Voltar ao menu</button>
+        </div>
+
+        <div class="container" id="config" style="display: none;">
+            <h1>Configurações ⚙️</h1>
+
+            <div class="opcao-config">
+                <span>Modo Escuro</span>
+                <label class="switch">
+                    <input type="checkbox" id="chk-dark">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <button onclick="mostrarMenu()">Voltar ao menu</button>
+        </div>
+    </div>
+
+    <script>
+        const doc = document.documentElement;
+        const chk = document.getElementById('chk-dark');
+
+        //Carregar preferências 
+        const dark = localStorage.tema === 'dark';
+        chk.checked = dark;
+
+        if (dark) doc.setAttribute('data-theme', 'dark');
+        document.body.classList.toggle('com-animacao', localStorage.animacoes !== 'false');
+
+        //Evento de mudança 
+        chk.onchange = () => {
+            const isDark = chk.checked;
+            doc.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            localStorage.tema = isDark ? 'dark' : 'light';
+        };
+
+        function mostrarCreditos() {
+            document.getElementById('config').style.display = 'none';
+            document.getElementById('menu').style.display = 'none';
+            document.getElementById('creditos').style.display = 'flex';
+        }
+
+        function mostrarMenu() {
+            document.getElementById('config').style.display = 'none';
+            document.getElementById('creditos').style.display = 'none';
+            document.getElementById('menu').style.display = 'block';
+        }
+
+        function mostrarConfig() {
+            document.getElementById('creditos').style.display = 'none';
+            document.getElementById('menu').style.display = 'none';
+            document.getElementById('config').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
