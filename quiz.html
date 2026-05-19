@@ -9,7 +9,6 @@
 </head>
 
 <body>
-  <!-- Tail Wind -->
   <!-- TELA INICIAL -->
   <div id="start-screen">
 
@@ -60,7 +59,6 @@
 
     <button onclick="location.reload()">
       Jogar Novamente
-      <!-- Fazer um botão de "Voltar para o menu inicial" -->
     </button>
 
     <button onclick="location.href='menu.html'">Voltar ao menu</button>
@@ -93,7 +91,15 @@
         ],
         correct: 1
       },
-
+      {
+        question: "🖥️ Arquitetura e Organização de Computadores",
+        answers: [
+          "Estuda a estrutura interna, o funcionamento e a integração dos componentes de hardware, como processador, memória e barramentos",
+          "Como decorar o escritório e organizar os cabos do computador para ficar bonito",
+          "Uma reunião de computadores organizados em fila para decidir quem trabalha mais",
+        ],
+        correct: 0
+      },
       {
         question: "💻 Programação em Microinformática",
         answers: [
@@ -182,6 +188,24 @@
           "Resolver problemas de otimização usando equações lineares e restrições"
         ],
         correct: 2
+      },
+      {
+        question: "📊 Sistemas de Informação",
+        answers: [
+          "Combinação de pessoas, hardwares, softwares e redes que coletam, processam e distribuem dados em uma organização",
+          "Sistemas que te informam quando a sua entrega está chegando",
+          "Um grupo de pessoas fofocando e passando informações adiante na faculdade"
+        ],
+        correct: 0
+      },
+      {
+        question: "🔌 Laboratório de Hardware",
+        answers: [
+          "Lugar onde os computadores vão fazer exames de sangue e rotina",
+          "Prática de montagem, manutenção, testes de componentes físicos e diagnóstico de problemas em computadores",
+          "Oficina mecânica para computadores"
+        ],
+        correct: 1
       }
     ];
     let selectedQuestions = [];
@@ -307,9 +331,9 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('tema') === 'dark') {
+      if (localStorage.getItem('tema') === 'dark') {
         document.documentElement.setAttribute('data-theme', 'dark');
-    }
+      }
     });
 
   </script>
