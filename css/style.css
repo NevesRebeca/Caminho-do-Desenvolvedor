@@ -1,152 +1,185 @@
 /*Variáveis para modo claro e escuro*/
 :root {
-    --bg-principal: #B9D6F2;
-    --bg-card: #73B8FC;
-    --texto: #003559;
-    --primaria: #0353A4;
-    --secundaria: #061A40;
-    --transicao: 0.3s;
+  --bg-principal: #b9d6f2;
+  --bg-card: #73b8fc;
+  --texto: #003559;
+  --primaria: #0353a4;
+  --secundaria: #061a40;
+  --btn-texto: #ffffff;
+  --transicao: 0.3s;
 }
 
 [data-theme="dark"] {
-    --bg-principal: #061A40;
-    --bg-card: #003559;
-    --texto: #B9D6F2;
-    --primaria: #33B4FF;
-    --secundaria: #B9D6F2;
+  --bg-principal: #061a40;
+  --bg-card: #003559;
+  --texto: #b9d6f2;
+  --primaria: #33b4ff;
+  --secundaria: #b9d6f2;
+  --btn-texto: #323136;
 }
-
 
 body {
-    background-color: var(--bg-principal);
-    color: var(--texto);
-    font-family: 'Segoe UI', Arial, sans-serif;
-    transition: background-color var(--transicao), color var(--transicao);
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  background-color: var(--bg-principal);
+  color: var(--texto);
+  font-family: "Segoe UI", Arial, sans-serif;
+  transition:
+    background-color var(--transicao),
+    color var(--transicao);
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-h1, h2, h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    text-align: center;
+h1,
+h2,
+h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-align: center;
 }
-h1, h2 { color: var(--primaria); font-size: 2rem; }
-h2 { font-size: 1.5rem; }
-h3 { color: var(--secundaria); font-size: 1.5rem; }
+h1,
+h2 {
+  color: var(--primaria);
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
+h3 {
+  color: var(--secundaria);
+  font-size: 1.5rem;
+}
 
 p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-button, .btn {
-    background-color: var(--primaria);
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-    margin: 8px 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: all var(--transicao);
+button,
+.btn {
+  background-color: var(--primaria);
+  color: var(--btn-texto);
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  margin: 8px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all var(--transicao);
 }
 
-button:hover, .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+button:hover,
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .container {
-    width: 100%;
-    max-width: 450px;
-    min-height: 300px;
-    padding: 30px;
-    background-color: var(--bg-card);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: all var(--transicao);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  width: 100%;
+  max-width: 450px;
+  min-height: 300px;
+  padding: 30px;
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all var(--transicao);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 input {
-    width: 100%;
-    margin: 15px 0;
-    padding: 14px 16px;
-    font-size: 1rem;
-    border: 2px solid rgba(136, 136, 136, 0.603);
-    border-radius: 8px;
-    background-color: var(--bg-principal);
-    color: var(--texto);
-    outline: none;
-    transition: all var(--transicao), transform 0.2s ease; 
+  width: 100%;
+  margin: 15px 0;
+  padding: 14px 16px;
+  font-size: 1rem;
+  border: 2px solid rgba(136, 136, 136, 0.603);
+  border-radius: 8px;
+  background-color: var(--bg-principal);
+  color: var(--texto);
+  outline: none;
+  transition:
+    all var(--transicao),
+    transform 0.2s ease;
 }
 
 input::placeholder {
-    color: #999;
-    transition: all var(--transicao) ease;
+  color: #999;
+  transition: all var(--transicao) ease;
 }
 
 input:focus {
-    border-color: var(--primaria);
-    box-shadow: 0 0 12px rgba(74, 144, 226, 0.4);
-    transform: scale(1.01);
+  border-color: var(--primaria);
+  box-shadow: 0 0 12px rgba(74, 144, 226, 0.4);
+  transform: scale(1.01);
 }
 
 input:focus::placeholder {
-    transform: translateX(8px);
-    opacity: 0.5;
+  transform: translateX(8px);
+  opacity: 0.5;
 }
 
 /*Slider para configurações*/
 .opcao-config {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px 0;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
 }
 
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 24px;
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
 }
-.switch input { display: none; }
+.switch input {
+  display: none;
+}
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #ccc;
-    border-radius: 24px;
-    transition: 0.4s;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 24px;
+  transition: 0.4s;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 16px; width: 16px;
-    left: 4px; bottom: 4px;
-    background-color: white;
-    border-radius: 50%;
-    transition: 0.4s;
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
 }
 
-input:checked + .slider { background-color: #4af2a1; }
-input:checked + .slider:before { transform: translateX(26px); }
+input:checked + .slider {
+  background-color: #4af2a1;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
 
-
+#name-error {
+  color: red;
+  display: none;
+  font-size: 14px;
+}

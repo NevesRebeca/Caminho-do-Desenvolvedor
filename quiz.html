@@ -23,6 +23,7 @@
     <p>Insira seu nome para começar:</p>
 
     <input type="text" id="username" placeholder="Digite seu nome">
+    <span id="name-error">Digite seu nome!</span>
     <br><br>
 
     <button onclick="startJourney()">Iniciar Jornada</button>
@@ -33,6 +34,7 @@
   <!-- TELA DO QUIZ -->
   <div id="quiz-screen" style="display: none;">
     <h2 id="welcome-player"></h2>
+    <p> Selecione a alternativa correta: </p>
     <h3 id="question"></h3>
     <div id="answers"></div>
     <br>
@@ -213,13 +215,13 @@
     function startJourney() {
       username = document.getElementById("username").value;
       if (username.trim() === "") {
-        alert("Digite seu nome!");
+        document.getElementById("name-error").style.display = "block";
         return;
       }
       document.getElementById("start-screen").style.display = "none";
       document.getElementById("quiz-screen").style.display = "block";
       document.getElementById("welcome-player").innerText =
-        "Boa sorte, " + username + "!";
+        "Boa sorte, " + username + "!"
       selectedQuestions = shuffleArray(questions).slice(0, 5);
       showQuestion();
     }
